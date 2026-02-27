@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Compass, ArrowRight, Brain, MessageSquare, Shield } from 'lucide-react';
+export const dynamic = 'force-dynamic';
+
 
 export default async function LandingPage() {
   const supabase = createClient();
@@ -57,8 +59,8 @@ export default async function LandingPage() {
           </h1>
 
           <p className="text-lg text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
-            DealPilot coaches you through your entire B2B sales journey — 
-            from discovery to close — using proven frameworks in persuasion, 
+            DealPilot coaches you through your entire B2B sales journey —
+            from discovery to close — using proven frameworks in persuasion,
             neuroscience, and strategic selling.
           </p>
 
@@ -81,7 +83,7 @@ export default async function LandingPage() {
             </div>
             <h3 className="text-white font-semibold mb-2">Deal Strategy</h3>
             <p className="text-sm text-gray-400 leading-relaxed">
-              Get stage-specific coaching using Cialdini&apos;s principles, 
+              Get stage-specific coaching using Cialdini&apos;s principles,
               JTBD, and neuroscience of buying decisions.
             </p>
           </div>
@@ -91,7 +93,7 @@ export default async function LandingPage() {
             </div>
             <h3 className="text-white font-semibold mb-2">Full Journey Memory</h3>
             <p className="text-sm text-gray-400 leading-relaxed">
-              Your coach remembers every conversation. 
+              Your coach remembers every conversation.
               It builds on previous sessions as your deal evolves.
             </p>
           </div>
@@ -101,7 +103,7 @@ export default async function LandingPage() {
             </div>
             <h3 className="text-white font-semibold mb-2">Document Review</h3>
             <p className="text-sm text-gray-400 leading-relaxed">
-              Paste emails or upload proposals. 
+              Paste emails or upload proposals.
               Get persuasion-optimized feedback instantly.
             </p>
           </div>
