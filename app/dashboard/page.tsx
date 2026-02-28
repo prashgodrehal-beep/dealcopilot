@@ -173,7 +173,14 @@ export default function DashboardPage() {
                       </p>
                     )}
                   </div>
-                  <ChevronRight className="w-4 h-4 text-gray-600 flex-shrink-0" />
+                  <Link
+                    href={`/dashboard/deals/${deal.id}/chat`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex-shrink-0 p-2.5 rounded-xl bg-brand-500/10 text-brand-400 hover:bg-brand-500/20 transition-all"
+                    title="Start coaching session"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                  </Link>
                 </Link>
               );
             })}
@@ -185,7 +192,7 @@ export default function DashboardPage() {
       <div>
         <h2 className="text-lg font-semibold text-white mb-4">Coach Capabilities</h2>
         <div className="grid sm:grid-cols-3 gap-3">
-          <div className="card !p-5 opacity-60">
+          <div className="card !p-5">
             <div className="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center mb-3">
               <Sparkles className="w-4 h-4 text-blue-400" />
             </div>
@@ -193,8 +200,8 @@ export default function DashboardPage() {
             <p className="text-xs text-gray-500">
               &quot;What should I do next?&quot; — stage-aware coaching with full deal memory.
             </p>
-            <span className="inline-block mt-2 text-[10px] px-2 py-0.5 rounded bg-surface-lighter text-gray-500">
-              Stage 4
+            <span className="inline-block mt-2 text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-semibold">
+              Active
             </span>
           </div>
           <div className="card !p-5 opacity-60">

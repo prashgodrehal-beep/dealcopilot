@@ -307,25 +307,38 @@ export default function DealDetailPage() {
         </div>
       )}
 
-      {/* Coaching sessions (placeholder for Stage 4) */}
+      {/* Coaching sessions */}
       <div className="card mb-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold text-gray-400 flex items-center gap-2">
             <MessageSquare className="w-4 h-4" />
             Coaching Sessions
           </h3>
+          <Link
+            href={`/dashboard/deals/${deal.id}/chat`}
+            className="btn-primary !py-1.5 !px-3 text-xs flex items-center gap-1.5"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            Start Coaching
+          </Link>
         </div>
-        <div className="text-center py-10">
-          <div className="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center mx-auto mb-4">
-            <Sparkles className="w-6 h-6 text-brand-500" />
-          </div>
-          <h4 className="text-sm font-semibold text-white mb-1">
-            AI Coaching coming in Stage 4
-          </h4>
-          <p className="text-xs text-gray-500 max-w-sm mx-auto">
-            Your co-pilot will be able to coach you on this deal with full context 
-            of your company, product, buyer, and deal history.
-          </p>
+        <div className="text-center py-8">
+          <Link
+            href={`/dashboard/deals/${deal.id}/chat`}
+            className="inline-flex flex-col items-center gap-3 group"
+          >
+            <div className="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center group-hover:bg-brand-500/20 transition-all">
+              <Sparkles className="w-6 h-6 text-brand-500" />
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-white group-hover:text-brand-400 transition-colors">
+                Open AI Coach
+              </h4>
+              <p className="text-xs text-gray-500 max-w-sm mx-auto mt-1">
+                Get stage-aware coaching with full deal context and your methodology.
+              </p>
+            </div>
+          </Link>
         </div>
       </div>
 

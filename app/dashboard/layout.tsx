@@ -8,12 +8,13 @@ import { Profile } from '@/lib/types';
 import {
   Compass, LayoutDashboard, Target, Settings,
   CreditCard, LogOut, Menu, X, ChevronDown,
-  User,
+  User, BookOpen,
 } from 'lucide-react';
 
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { label: 'My Deals', href: '/dashboard/deals', icon: Target },
+  { label: 'Knowledge Base', href: '/dashboard/knowledge', icon: BookOpen, adminOnly: true },
   { label: 'Credits', href: '/dashboard/credits', icon: CreditCard, badge: 'Soon' },
   { label: 'Settings', href: '/dashboard/settings', icon: Settings, badge: 'Soon' },
 ];
@@ -30,10 +31,14 @@ export default function DashboardLayout({
   const [creditBalance, setCreditBalance] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const loadProfile = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
+
+    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+    setIsAdmin(!!adminEmail && user.email === adminEmail);
 
     const { data: profileData } = await supabase
       .from('profiles')
@@ -105,7 +110,9 @@ export default function DashboardLayout({
 
         {/* Nav links */}
         <nav className="flex-1 px-3 py-2 space-y-1">
-          {NAV_ITEMS.map((item) => {
+          {NAV_ITEMS
+            .filter((item) => !('adminOnly' in item && item.adminOnly) || isAdmin)
+            .map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href || 
               (item.href !== '/dashboard' && pathname.startsWith(item.href));
