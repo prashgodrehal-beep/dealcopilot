@@ -5,7 +5,10 @@ const nextConfig = {
       { protocol: 'https', hostname: '*.supabase.co' },
     ],
   },
-  serverExternalPackages: ['pdf-parse', 'mammoth', '@anthropic-ai/sdk'],
+  // Fix: Move serverExternalPackages inside experimental for Next.js 14.2.x
+  experimental: {
+    serverExternalPackages: ['pdf-parse', 'mammoth', '@anthropic-ai/sdk'],
+  },
 };
 
 module.exports = nextConfig;
