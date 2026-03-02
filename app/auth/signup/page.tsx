@@ -19,28 +19,37 @@ export default function SignupPage() {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const { error } = await supabase.auth.signUp({
-        email: email.trim(),
-        password,
-        options: {
-          data: { full_name: fullName.trim() },
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
-        },
-      });
+    const maxRetries = 2;
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const { error } = await supabase.auth.signUp({
+          email: email.trim(),
+          password,
+          options: {
+            data: { full_name: fullName.trim() },
+            emailRedirectTo: `${window.location.origin}/auth/callback`,
+          },
+        });
 
-      if (error) {
-        toast.error(error.message);
+        if (error) {
+          toast.error(error.message);
+          setLoading(false);
+          return;
+        }
+
+        toast.success('Account created! Check your email to verify, then sign in.');
+        router.push('/auth/login');
         return;
+      } catch {
+        if (attempt < maxRetries) {
+          // Wait briefly and retry on network failure
+          await new Promise((r) => setTimeout(r, 1500));
+          continue;
+        }
+        toast.error('Network error — please check your connection and try again.');
       }
-
-      toast.success('Account created! Check your email to verify, then sign in.');
-      router.push('/auth/login');
-    } catch {
-      toast.error('Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   return (

@@ -18,39 +18,47 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
 
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
-        password,
-      });
+    const maxRetries = 2;
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: email.trim(),
+          password,
+        });
 
-      if (error) {
-        toast.error(error.message);
-        return;
-      }
-
-      // Check if onboarding is complete
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('onboarding_complete')
-          .eq('id', user.id)
-          .single();
-
-        if (profile?.onboarding_complete) {
-          router.push('/dashboard');
-        } else {
-          router.push('/profile/setup');
+        if (error) {
+          toast.error(error.message);
+          setLoading(false);
+          return;
         }
-      }
 
-      router.refresh();
-    } catch {
-      toast.error('Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
+        // Check if onboarding is complete
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('onboarding_complete')
+            .eq('id', user.id)
+            .single();
+
+          if (profile?.onboarding_complete) {
+            router.push('/dashboard');
+          } else {
+            router.push('/profile/setup');
+          }
+        }
+
+        router.refresh();
+        return;
+      } catch {
+        if (attempt < maxRetries) {
+          await new Promise((r) => setTimeout(r, 1500));
+          continue;
+        }
+        toast.error('Network error — please check your connection and try again.');
+      }
     }
+    setLoading(false);
   };
 
   return (
