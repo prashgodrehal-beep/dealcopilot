@@ -8,11 +8,12 @@ import { Profile } from '@/lib/types';
 import {
   Compass, LayoutDashboard, Target, Settings,
   CreditCard, LogOut, Menu, X, ChevronDown,
-  User, BookOpen,
+  User, BookOpen, Zap
 } from 'lucide-react';
 
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { label: 'Follow-Up', href: '/dashboard/followup', icon: Zap },  // ← ADD THIS LINE
   { label: 'My Deals', href: '/dashboard/deals', icon: Target },
   { label: 'Knowledge Base', href: '/dashboard/knowledge', icon: BookOpen, adminOnly: true },
   { label: 'Credits', href: '/dashboard/credits', icon: CreditCard, badge: 'Soon' },
@@ -113,32 +114,31 @@ export default function DashboardLayout({
           {NAV_ITEMS
             .filter((item) => !('adminOnly' in item && item.adminOnly) || isAdmin)
             .map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname === item.href || 
-              (item.href !== '/dashboard' && pathname.startsWith(item.href));
-            return (
-              <Link
-                key={item.href}
-                href={item.badge ? '#' : item.href}
-                onClick={(e) => item.badge && e.preventDefault()}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                  isActive
+              const Icon = item.icon;
+              const isActive = pathname === item.href ||
+                (item.href !== '/dashboard' && pathname.startsWith(item.href));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.badge ? '#' : item.href}
+                  onClick={(e) => item.badge && e.preventDefault()}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive
                     ? 'bg-brand-500/10 text-brand-400 border border-brand-500/15'
                     : item.badge
-                    ? 'text-gray-600 cursor-default'
-                    : 'text-gray-400 hover:text-gray-200 hover:bg-surface-hover'
-                }`}
-              >
-                <Icon className="w-4.5 h-4.5" />
-                {item.label}
-                {item.badge && (
-                  <span className="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-surface-lighter text-gray-600">
-                    {item.badge}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
+                      ? 'text-gray-600 cursor-default'
+                      : 'text-gray-400 hover:text-gray-200 hover:bg-surface-hover'
+                    }`}
+                >
+                  <Icon className="w-4.5 h-4.5" />
+                  {item.label}
+                  {item.badge && (
+                    <span className="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-surface-lighter text-gray-600">
+                      {item.badge}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
         </nav>
 
         {/* User menu */}
