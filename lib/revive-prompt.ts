@@ -74,6 +74,44 @@ ALWAYS PRESERVE:
 - Professional tone — never pushy, sarcastic, or manipulative
 - Honesty — never fabricate case studies or specific results
 
+FOLLOW-UP FRAMEWORKS (choose the best fit for the situation):
+
+A. Third-Person Story — Share a relatable story about someone who faced a similar situation. No pitch, just connection.
+B. Chris Voss Negative Label — Use calibrated labels like "It seems like this may no longer be a priority." Respectful, never sarcastic.
+C. Permission Close — Ask permission to stay in touch or close the loop. Low pressure, easy to respond to.
+D. Insight Follow-Up — Share a useful observation or industry insight without pitching anything.
+E. Benchmark Follow-Up — Use comparison with similar companies or leaders to create relevance.
+F. Contrarian Insight — Challenge a common belief in a thoughtful way that makes them think.
+G. Loss Aversion — Highlight the cost of delay without fearmongering. What they're losing by waiting.
+H. Cialdini Principle — Apply Reciprocity, Social Proof, Authority, Consistency, Scarcity, Unity, or Liking.
+I. Soft Breakup — Use when multiple follow-ups have failed. Respectful, non-needy. Creates space for them to re-engage on their terms.
+J. Executive Strategic Note — A high-level, peer-to-peer message that reads like one leader writing to another.
+
+K. **Pipeline Closure** — THIS IS DISTINCT FROM ALL ABOVE. The goal is NOT to revive the deal. The goal is to get a DEFINITIVE outcome — yes or no. Use this when:
+   - Multiple follow-ups have already been sent with no response
+   - The deal temperature is "politely cold" or "likely lost"
+   - The user's goal is "close the loop"
+   - More than 3 weeks of silence
+   
+   Psychology: Respect their time. Remove ALL pressure. Give them explicit permission to say "no." Make responding easier than ignoring.
+   
+   Key principles:
+   - Frame it as YOUR need to close your notes, not their obligation to respond
+   - "No worries if you've chosen another direction" — removes guilt completely
+   - Ask for just "a one-line update" — makes the effort feel tiny
+   - Never hint at disappointment, frustration, or loss
+   - The paradox: genuine permission to leave often brings people back
+   
+   Example tone: "Completely understand if the timing isn't right or you've gone another direction. A one-line update would help me close my notes on this. Either way, no hard feelings."
+
+FRAMEWORK SELECTION LOGIC:
+- If silence < 7 days → Insight, Benchmark, or Third-Person Story
+- If silence 7-14 days → Negative Label, Permission Close, or Cialdini
+- If silence 14-21 days → Loss Aversion, Contrarian Insight, or Soft Breakup
+- If silence > 21 days OR multiple follow-ups failed → Pipeline Closure
+- If user's goal is "close the loop" → Always recommend Pipeline Closure
+- If deal temperature is "likely lost" or "politely cold" → Strongly consider Pipeline Closure
+
 ---
 
 DEAL CONTEXT:
@@ -100,7 +138,7 @@ YOUR OUTPUT — respond in this EXACT JSON structure (no markdown, no backticks,
   },
   "strategy": {
     "name": "Name of recommended strategy",
-    "framework": "Which framework this uses (e.g., Chris Voss Negative Label, Cialdini Reciprocity, Permission Close)",
+    "framework": "Which framework this uses (e.g., Chris Voss Negative Label, Cialdini Reciprocity, Permission Close, Pipeline Closure)",
     "why_this_works": "2-3 sentences explaining why this strategy fits THIS specific situation, in plain language"
   },
   "followups": {
