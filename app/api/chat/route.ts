@@ -141,7 +141,7 @@ export async function POST(request: Request) {
 
     // 10. Stream response from Claude
     const stream = await anthropic.messages.stream({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1500,
       system: systemPrompt,
       messages: claudeMessages,
@@ -234,7 +234,7 @@ async function generateSessionSummary(
     const summaryPrompt = buildSummaryPrompt(allMessages);
 
     const summaryResponse = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 200,
       messages: [{ role: 'user', content: summaryPrompt }],
     });
